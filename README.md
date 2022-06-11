@@ -28,3 +28,32 @@
 *Clarity:* This is the common problem where developers keeps on changing, a well written code with comments and proper naming conventions will make easy for the other developers to understand.
 
 *Approachability:* Spending less time to adapt to a new language is always appreciated. With that more developers will be willing to learn.
+
+# Chapter 2 - Day 1 - Our First Smart Contract
+
+Smart Contract 
+```
+pub contract JacobTucker {
+  
+  pub let is: String
+
+  init() {
+    self.is = "the best"
+  }  
+
+  pub fun readIs(): String {
+    return self.is
+  }
+}
+```
+
+Script
+```
+import JacobTucker from 0x03
+
+pub fun main(): String {
+  return JacobTucker.readIs()
+}
+```
+![image](https://user-images.githubusercontent.com/12966342/173198095-eeee4d39-f6f5-48bb-8786-4a3314c1f496.png)
+
