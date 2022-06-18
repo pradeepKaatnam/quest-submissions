@@ -64,7 +64,8 @@ pub fun main(): String {
 3. ```prepare``` phase to access the data in the users account and ```execute``` phase is where the transcation will get executed by calling the methods in smart contract. Note: Everything can be done in prepare phase but not vice versa.
 
 4. Smart Contract 
-```pub contract HelloWorld {
+```
+pub contract HelloWorld {
 
     pub var myNumber: Int
 
