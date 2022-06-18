@@ -57,3 +57,45 @@ pub fun main(): String {
 ```
 ![image](https://user-images.githubusercontent.com/12966342/173198095-eeee4d39-f6f5-48bb-8786-4a3314c1f496.png)
 
+# Chapter 2 Day 2 - Transactions and Scripts
+
+1. Scripts are meant to only read the data present in the contact, changing data requires gas and can be only done in a transaction.
+2. Using AuthAccount type, once can access data in their account. In order to perform a transaction one has to pay for it and sign, the signing information can also accessed using AuthAccount.
+3. ```prepare``` phase to access the data in the users account and ```execute``` phase is where the transcation will get executed by calling the methods in smart contract. Note: Everything can be done in prepare phase but not vice versa.
+
+4. Smart Contract 
+```pub contract HelloWorld {
+
+    pub var myNumber: Int
+
+    pub fun updateMyNumber (newNumber: Int) {
+        self.myNumber = newNumber
+    }
+
+    init() {
+        self.myNumber = 0
+    }
+}
+```
+
+Script
+```
+import HelloWorld from 0x01
+
+pub fun main(): Int {
+    return HelloWorld.myNumber
+}
+```
+
+Transaction
+```
+import HelloWorld from 0x01
+
+transaction(myNewNumber: Int) {
+    prepare(signer: AuthAccount) {}
+
+    execute {
+      HelloWorld.updateMyNumber(newNumber: myNewNumber)
+    }
+}
+```
