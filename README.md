@@ -132,3 +132,56 @@ pub fun main() {
 4.b When you access elements of a dictionary, it returns the value as an optional by default. Since return type is defined as just String, it is giving mismatched type error.
 
 4.c This can be fixed in two ways, one is to use force unwarp operator (!) on the returned value and other is to change the return type to an optional type (String?)
+
+# Chapter 2 Day 4 - Basic Structs
+
+```
+pub contract Authentication {
+
+    pub var favouriteBooks: {Address: FavouriteBook}
+    
+    pub struct FavouriteBook {
+        pub let bookName: String
+        pub let authorName: String
+
+        init(_bookName: String, _authorName: String) {
+            self.bookName = _bookName
+            self.authorName = _authorName
+        }
+    }
+
+    pub fun addFavouriteBook(bookName: String, authorName: String, account: Address) {
+        let newFavouriteBook = FavouriteBook(_bookName: bookName, _authorName: authorName)
+        self.favouriteBooks[account] = newFavouriteBook
+    }
+
+    init() {
+        self.favouriteBooks = {}
+    }
+
+}
+```
+
+```
+import Authentication from 0x01
+
+transaction(book: String, author: String, account: Address) {
+
+    prepare(signer: AuthAccount) {}
+
+    execute {
+        Authentication.addFavouriteBook(bookName: book, authorName: author, account: account)
+        log("We're done.")
+    }
+}
+```
+
+```
+import Authentication from 0x01
+
+pub fun main(address: Address): Authentication.FavouriteBook {
+  return Authentication.favouriteBooks[address]!
+}
+```
+```
+```
