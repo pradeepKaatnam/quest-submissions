@@ -100,3 +100,35 @@ transaction(myNewNumber: Int) {
     }
 }
 ```
+
+# Chapter 2 Day 3 - Arrays, Dictionaries, and Optionals
+1. In a script, initialize an array (that has length == 3) of your favourite people, represented as Strings, and log it.
+```
+pub fun main() {
+    let favouritePeople: [String] = ["Fav1", "Fav2", "Fav3"]
+    log(favouritePeople)
+}
+```
+2.
+```
+pub fun main() {
+    let usage: {String: UInt64} = {"Facebook": 5, "Instagram": 1, "Twitter": 4, "YouTube": 2, "Reddit": 0, "LinkedIn ": 3}
+    log(usage)
+}
+```
+3.  force unwrap operator ```!``` gets the actual value from an optional and fails the program if the value is nil
+```
+pub fun main() {
+    var num: Int? = 1
+    var unwrappedNum: Int = num! 
+
+    var num2: Int? = nil
+    var unwrappedName2: Int = num2! // fails the program
+}
+```
+
+4.a The return type is declared as String but the function is returning a String optional i.e. String?
+
+4.b When you access elements of a dictionary, it returns the value as an optional by default. Since return type is defined as just String, it is giving mismatched type error.
+
+4.c This can be fixed in two ways, one is to use force unwarp operator (!) on the returned value and other is to change the return type to an optional type (String?)
