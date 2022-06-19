@@ -183,5 +183,29 @@ pub fun main(address: Address): Authentication.FavouriteBook {
   return Authentication.favouriteBooks[address]!
 }
 ```
+
+# Chapter 3 Day 1 - Resources
+
+1. Structs can be copied and overriden but not the resources. Structs can be created anywhere whereas resource can be created only in smart contract. Resource must be used to handle secure data like NFT's whereas Structs are containers for data which are used for general purpose.
+2. Whenever there is a need to contain data in a very secure manner like giving someone an NFT which is worth millions.
+3. ```create``` is the keyword to make a new resource.
+4. No. Resource can be created only in smart contract.
+5. The type is ```Jacob```
+6. Resource return type definiton must be prefixed with @ i.e. ```@Jacob```. ```create``` keyword must be used to create a resource. Resource cannot be assigned, it must be moved using the operator ```<-```. Returning a resource should be prefixed with ```<-```
 ```
+pub contract Test {
+
+    // Hint: There's nothing wrong here ;)
+    pub resource Jacob {
+        pub let rocks: Bool
+        init() {
+            self.rocks = true
+        }
+    }
+
+    pub fun createJacob(): @Jacob { 
+        let myJacob <- create Jacob() 
+        return <- myJacob 
+    }
+}
 ```
