@@ -209,3 +209,43 @@ pub contract Test {
     }
 }
 ```
+
+# Chapter 3 Day 2 - Resources in Dictionaries & Arrays
+
+```
+pub contract Test {
+
+    pub let booksDictionary: @{String: Book}
+    pub let booksArray: @[Book]
+
+    pub resource Book {
+        pub let id: String
+        pub let name: String
+        init(_id: String, _name: String) {
+            self.id = _id
+            self.name = _name
+        }
+    }
+
+    pub fun addBookIntoDictionary(book: @Book) {
+        self.booksDictionary[book.name] <-! book
+    }
+
+    pub fun addBookIntoArray(book: @Book) {
+        self.booksArray.append(<- book)
+    }
+
+    pub fun removeBookFromDictionary(key: String): @Book {
+        return <- self.booksDictionary.remove(key: key)!
+    }
+
+    pub fun removeBookFromArray(index: Int): @Book  {
+        return <- self.booksArray.remove(at: index)
+    }
+
+    init() {
+        self.booksDictionary <- {}
+        self.booksArray <- []
+    }
+}
+```
