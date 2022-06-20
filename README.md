@@ -249,3 +249,41 @@ pub contract Test {
     }
 }
 ```
+
+# Chapter 3 Day 3 - References
+
+```
+pub contract Test {
+
+    pub var dictionaryOfBooks: @{String: Book}
+
+    pub resource Book {
+        pub let name: String
+        init(_name: String) {
+            self.name = _name
+        }
+    }
+
+    pub fun getReference(key: String): &Book? {
+        return &self.dictionaryOfBooks[key] as &Book?
+    }
+
+    init() {
+        self.dictionaryOfBooks <- {
+            "Horror": <- create Book(_name: "Conjuring"), 
+            "Action": <- create Book(_name: "JohnWick")
+        }
+    }
+}
+```
+
+```
+import Test from 0x01
+
+pub fun main(): String {
+  let ref = Test.getReference(key: "Horror")
+  return ref!.name // returns "Conjuring"
+}
+```
+
+For the scenarios where developers wants to operate on the data inside resource, ref will be useful since there is no need to move the resources in that case.
