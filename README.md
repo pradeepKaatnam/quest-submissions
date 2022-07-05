@@ -287,3 +287,45 @@ pub fun main(): String {
 ```
 
 For the scenarios where developers wants to operate on the data inside resource, ref will be useful since there is no need to move the resources in that case.
+
+# Chapter 3 Day 4 - Resource/Struct Interfaces
+1. To define finite set of requirements and to limit the access to the resource variables and methods.
+2. 
+```
+pub contract Stuff {
+
+    pub resource interface IBook {
+      pub var name: String
+    }
+
+    pub resource Book: IBook {
+      pub var name: String
+      pub var author: String
+
+      pub fun updateAuthor(newAuthor: String) {
+        self.author = newAuthor
+      }
+
+      init() {
+        self.name = "Spongebob"
+        self.author = "authorrr"
+      }
+    }
+
+    pub fun noInterface() {
+      let book: @Book <- create Book()
+      book.updateAuthor(newAuthor: "pradeep")
+      log(book.author) // 5
+
+      destroy book
+    }
+
+    pub fun yesInterface() {
+      let book: @Book{IBook} <- create Book()
+      book.updateAuthor(newAuthor: "pradeep") // ERROR: `member of restricted type is not accessible: updateAuthor`
+      log(book.author)
+      destroy book
+    }
+}
+```
+3. ```favouriteFruit``` must be declared in the struct as well and ```ITest``` interface should define ```changeGreeting`` method
